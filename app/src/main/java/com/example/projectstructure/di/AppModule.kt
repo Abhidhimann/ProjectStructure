@@ -1,26 +1,22 @@
 package com.example.projectstructure.di
 
-import com.example.projectstructure.data.remote.services.userservice.UserService
-import com.example.projectstructure.utils.Api
-import com.example.projectstructure.utils.RetroFitClientHelper
+import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import okhttp3.Headers
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ActivityComponent::class)
 object AppModules {
 
     @Provides
     @Singleton
-    fun providesUserService(): UserService {
-        return RetroFitClientHelper().getApiClient(
-            Api.BASE_URL.getValue()
-        ).create(UserService::class.java)
+    fun providesAppSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
     }
-
 
 }
