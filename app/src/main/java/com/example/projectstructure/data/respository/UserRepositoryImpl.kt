@@ -19,12 +19,7 @@ class UserRepositoryImpl @Inject constructor(
         return withContext(Dispatchers.IO) {
             try {
                 val response = userService.getUser("")
-                if (response.isSuccessful) {
-                    // do db operation
-                    return@withContext ResultResponse.Success(response.body().toString())
-                } else {
-                    return@withContext ResultResponse.Failed(Exception("do")) // Handle API errors appropriately
-                }
+                return@withContext ResultResponse.Success(response.toString())
             } catch (e: Exception) {
                 // handing error
                 return@withContext ResultResponse.Failed(Exception("do"))

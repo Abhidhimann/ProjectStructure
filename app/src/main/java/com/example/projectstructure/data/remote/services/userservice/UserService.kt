@@ -10,5 +10,5 @@ interface UserService {
     @GET("/user")
     suspend fun getUser(
         @Query("key") userId: String
-    ): Response<User>
+    ): User
 }
